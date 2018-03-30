@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-12 text-center">
+    <h1>
+      <a href="/">
+        <i class="fas fa-leaf"></i>
+      </a>
+        <a href="https://breezypdf.com">BreezyPDF</a>
+        <a href="https://github.com/danielwestendorf/breezy_pdf-ruby"><span class="fancy-font">Ruby Demo</span></a>
+      </a>
+    </h1>
+    <p>
+      <a class="btn btn-outline-primary breezy-pdf-remove pdf-link" <%= "disabled" if session[:locations].nil? %> href="/locations.pdf">
+        <i class="fas fa-download"></i>
+        Download As PDF
+      </a>
+    </p>
+  </div>
+  <div class="col-12 col-md-8 offset-md-2">
+    <p>
+      Let's create a super rich PDF using technologies we already love and use. This is an impractical demo which shows off a number of things about how BreezyPDF works.
+      <ul>
+        <li>There are some <span class="fancy-font">fancy web fonts</span> included. These don't have to be installed on the rendering node.</li>
+        <li>The page is JavaScript heavy. The map drawing and routing is all done with client side JS.</li>
+        <li>There are a number of form elements and buttons. We probably don't want those in the final PDF.</li>
+      </ul>
+    </p>
+    Now go a head and add your own location to the map, and then download the PDF!
+  </div>
+</div>
+
+<div class="row mt-3 mb-3 breezy-pdf-remove">
+  <div class="col-12 col-sm-8 col-md-6 offset-sm-2 offset-md-3">
+    <form action="/locations" method="POST" class="text-center">
+      <input type="hidden" id="latitude" name="latitude">
+      <input type="hidden" id="longitude" name="longitude">
+      <input type="hidden" id="location_name" name="location_name">
+    </form>
+
+    <div class="input-group">
+      <input class="form-control" type="text" id="add-location">
+
+      <div class="input-group-append">
+        <button id="submit" class="btn btn-outline-secondary" disabled="disabled">
+          <i class="fas fa-plus"></i>
+          Add Location
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row mb-3">
+  <div class="col-12">
+    <div class="embed-responsive embed-responsive-21by9">
+      <div id="map" class="embed-responsive-item border pre-render"></div>
+    </div>
+  </div>
+</div>
+
+<% unless session[:locations].nil? %>
+  <% session[:locations].each.with_index do |location, i| %>
+    <div class="row location mb-1">
+      <div class="col-10">
+        <h4 class="d-inline-block"><%= location[:location_name] %></h4> <span class="d-none d-sm-inline"><%= location[:latitude] %> <%= location[:longitude] %></span>
+      </div>
+      <div class="col-2 text-right">
+        <form action="/locations/<%= i %>" method="POST" class="breezy-pdf-remove">
+          <input type="hidden" name="_method" value="DELETE">
+          <button class="btn btn-danger pull-right">
+            <i class="fas fa-times"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  <% end %>
+
+  <script type="text/javascript">
+    window.locations = JSON.parse('<%= session[:locations].to_json %>');
+  </script>
+<% end %>
+
+
+<div id="pdf-loading" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please wait...</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          We're generating this PDF, it will be just a few moments...
+        </p>
+        <p>Time elapsed: <span id="timer">0.0</span> seconds</p>
+        <div class="spinner">
+          <div class="rect1"></div>
+          <div class="rect2"></div>
+          <div class="rect3"></div>
+          <div class="rect4"></div>
+          <div class="rect5"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-link pull-right" data-dismiss="modal">Nevermind</button>
+      </div>
+    </div>
+  </div>
+</div>
