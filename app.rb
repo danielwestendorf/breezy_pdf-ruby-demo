@@ -16,6 +16,8 @@ BreezyPDF.setup do |config|
   config.filter_elements            = true
   config.filter_elements_selectors  = %w[.breezy-pdf-remove]
   config.logger.level               = Logger::INFO
+
+  config.asset_cache                = BreezyPDF::Cache::InMemory.new if ENV['RACK_ENV'] == 'production'
 end
 
 use BreezyPDF::Middleware
