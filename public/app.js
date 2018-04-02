@@ -69,11 +69,10 @@ function drawMap() {
       // This is a hack for Google Maps and it's lazy-loading of images
       document.getElementById('map').classList.remove('pre-render');
 
-      // Repeat the event firing until the renderer can detect it
-      // Sometimes the JS renders before the renderer is listening!
-      setInterval(function() {
-        document.body.dispatchEvent(new CustomEvent('pdfRenderReady', {}));
-      }, 10)
+      // Let's give the map some extra time to render
+      setTimeout(function() {
+        window.pdfRenderReady = true;
+      }, 500)
     }
 
     if (window.locations.length > 1) {
