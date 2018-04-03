@@ -22,7 +22,11 @@ end
 
 use BreezyPDF::Middleware
 set :public_folder, File.dirname(__FILE__) + '/public'
-enable :sessions
+use Rack::Session::Cookie, key:          'session',
+                           domain:       ENV.fetch("HOST", "localhost"),
+                           path:         '/',
+                           expire_after:  2592000, # In seconds
+                           secret:       ENV.fetch("SECRET", "123456")
 
 get '/' do
   redirect "/locations"

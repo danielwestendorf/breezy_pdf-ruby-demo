@@ -91,7 +91,7 @@ function drawMap() {
       dirService.route(request, (result, status) => {
         if (status == google.maps.DirectionsStatus.OK) {
 
-          google.maps.event.addListenerOnce(map, 'tilesloaded', function(){
+          google.maps.event.addListenerOnce(map, 'idle', function(){
             triggerCompletion()
           });
 
