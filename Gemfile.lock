@@ -9,6 +9,7 @@ GEM
     mustermann (1.0.2)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    puma (3.11.3)
     rack (2.0.4)
     rack-protection (2.0.1)
       rack
@@ -24,6 +25,7 @@ PLATFORMS
 
 DEPENDENCIES
   breezy_pdf (~> 0.0.17)
+  puma
   sinatra
 
 RUBY VERSION
