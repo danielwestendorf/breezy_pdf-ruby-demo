@@ -2,28 +2,49 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>BreezyPDF Ruby Example!</title>
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="/app.css" type="text/css" media="all"/>
-
-    <script src="/app.js"> </script>
+    <link rel="stylesheet" href="/app.css?timestamp=<%= Time.now.to_i %>" type="text/css" media="all"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="breezy-pdf-variable" content="pdfRenderReady">
-    <meta name="breezy-pdf-timeout" content="10000">
-    <meta name="breezy-pdf-filename" content="rendered-just-for-<%= request.ip %>.pdf">
+    <%= yield_content :head %>
   </head>
-  <body>
+  <body class="<%= 'pdf' if params[:pdf] %>">
+    <%= yield_content :pre_content %>
     <div class="container">
       <%= yield %>
+    </div>
+
+    <div id="pdf-loading" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Please wait...</h5>
+          </div>
+          <div class="modal-body">
+            <p>
+              We're generating this PDF, it will be just a few moments...
+            </p>
+            <div class="spinner">
+              <div class="rect1"></div>
+              <div class="rect2"></div>
+              <div class="rect3"></div>
+              <div class="rect4"></div>
+              <div class="rect5"></div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-link pull-right" data-dismiss="modal">Nevermind</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script async="true" defer="true" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=mapping&v=3.exp&use_slippy=false"></script>
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <script src="/app.js"> </script>
   </body>
 </html>

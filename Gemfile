@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
-gem 'breezy_pdf', '~> 0.0.17'
+gem 'breezy_pdf', '~> 0.0.19'
 gem 'sinatra'
+gem 'sinatra-contrib'
 gem 'puma'

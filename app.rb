@@ -1,4 +1,6 @@
 require 'sinatra'
+require 'sinatra/content_for'
+
 require 'breezy_pdf'
 
 # Configure Breezy PDF
@@ -8,7 +10,7 @@ BreezyPDF.setup do |config|
 
   # See the breezy_pdf gem's documentation for configuration information
   # https://github.com/danielwestendorf/breezy_pdf-ruby#configuration
-  config.middleware_path_matchers   = [/locations\.pdf/]
+  config.middleware_path_matchers   = [/locations\.pdf/, /survey-results\.pdf/]
   config.treat_urls_as_private      = true
   config.upload_assets              = true
   config.extract_metadata           = true
@@ -28,6 +30,8 @@ use Rack::Session::Cookie, key:          'session',
                            expire_after:  2592000, # In seconds
                            secret:       ENV.fetch("SECRET", "123456")
 
+helpers Sinatra::ContentFor
+
 get '/' do
   redirect "/locations"
 end
@@ -37,7 +41,7 @@ get '/locations' do
     { latitude: "40.7127753", longitude: "-74.0059728", location_name: "New York" },
     { latitude: "34.0522342", longitude: "-118.2436849", location_name: "Los Angeles" },
   ]
-  erb :index
+  erb :locations
 end
 
 post '/locations' do
@@ -53,4 +57,8 @@ delete '/locations/:index' do
   session[:locations].delete_at(i) if session[:locations][i]
 
   redirect "/"
+end
+
+get "/survey-results" do
+  erb :survey_results
 end

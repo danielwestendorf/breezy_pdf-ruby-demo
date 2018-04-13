@@ -2,6 +2,30 @@
   font-family: 'Indie Flower', cursive;
 }
 
+body .container {
+  max-width: 992px;
+}
+
+body.pdf {
+  background: transparent;
+}
+
+.page {
+  min-height: 1056px;
+}
+
+.pdf .page {
+  min-height: 100vh;
+}
+
+.pdf .page.page-break-after {
+  page-break-after: always;
+}
+
+ol > li > ol {
+  list-style: lower-latin;
+}
+
 /* This is a hack for Google Maps and it's lazy-loading of images */
 #map.pre-render > div {
   min-width: 200%;

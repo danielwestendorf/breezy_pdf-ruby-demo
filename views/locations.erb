@@ -82,30 +82,12 @@
     window.locations = JSON.parse('<%= session[:locations].to_json %>');
   </script>
 <% end %>
+<script src="/maps.js"> </script>
+<script async="true" defer="true" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&libraries=places&callback=mapping&v=3.exp&use_slippy=false"></script>
 
-
-<div id="pdf-loading" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Please wait...</h5>
-      </div>
-      <div class="modal-body">
-        <p>
-          We're generating this PDF, it will be just a few moments...
-        </p>
-        <p>Time elapsed: <span id="timer">0.0</span> seconds</p>
-        <div class="spinner">
-          <div class="rect1"></div>
-          <div class="rect2"></div>
-          <div class="rect3"></div>
-          <div class="rect4"></div>
-          <div class="rect5"></div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-link pull-right" data-dismiss="modal">Nevermind</button>
-      </div>
-    </div>
-  </div>
-</div>
+<% content_for :head do %>
+  <title>BreezyPDF Ruby Example</title>
+  <meta name="breezy-pdf-variable" content="pdfRenderReady">
+  <meta name="breezy-pdf-timeout" content="10000">
+  <meta name="breezy-pdf-filename" content="rendered-just-for-<%= request.ip %>.pdf">
+<% end %>

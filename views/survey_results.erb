@@ -1,0 +1,513 @@
+<% content_for :head do %>
+    <meta name="breezy-pdf-timer" content="500">
+    <meta name="breezy-pdf-filename" content="2018-ruby-survey-results.pdf">
+
+    <meta name="breezy-pdf-marginTop" content="1">
+    <meta name="breezy-pdf-marginBottom" content="1">
+    <meta name="breezy-pdf-footerTemplate" content="<%= ERB::Util.html_escape yield_content :footer_template %>">
+    <meta name="breezy-pdf-headerTemplate" content="<%= ERB::Util.html_escape yield_content :header_template %>">
+    <title>2018 Ruby PDF Rendering Survey</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+
+    <script type="text/javascript">
+      window.chartColors = [
+        '#EA574B', '#F0AE24', '#3FB4C6', '#565D6A', '#F4B9B8',
+        '#EB593B', '#B0DFE4', '#F1E4DB'
+      ];
+    </script>
+
+    <% if params[:pdf] %>
+      <script type="text/javascript">
+        // Disable chart animations when rendering as a PDF
+        Chart.defaults.global.animation.duration = 0;
+        Chart.defaults.global.responsiveAnimationDuration = 0;
+      </script>
+    <% end %>
+<% end %>
+
+<%= erb :_header %>
+<%= erb :_footer %>
+<%= erb :_nav %>
+
+<div class="page d-flex flex-column justify-content-center">
+  <h1 class="text-center">2018 Ruby PDF Render Survey</h1>
+</div>
+
+<div class="page">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+      <h2 class="text-center border-bottom  mb-4 pb-2">Table of Contents</h2>
+      <ol>
+        <li>
+          <a href="#1">Overview</a>
+        </li>
+        <li class="mt-1">
+          <a href="#2a">Survey Results</a>
+          <ol>
+            <li class="mt-1">
+              <a href="#2a">Do you find building complex PDF's painful?</a>
+            </li>
+            <li class="mt-1">
+              <a href="#2b">What do you use for PDF rendering?</a>
+            </li>
+            <li class="mt-1">
+              <a href="#2c">Approximately, how many PDF's do your systems render, per month?</a>
+            </li>
+            <li class="mt-1">
+              <a href="#2d">Do you render your PDF's from a web server process, in a background queue, or in a non-web environment?</a>
+            </li>
+            <li class="mt-1">
+              <a href="#2e">Would you use a SaaS to render PDF's in your projects?</a>
+            </li>
+            <li class="mt-1">
+              <a href="#2f">What is hard about rendering PDFs?</a>
+            </li>
+            <li class="mt-1">
+              <a href="#2g">What's the most important thing to you when it comes to PDF rendering?</a>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div id="1" class="page">
+  <div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+      <h2 class="text-center border-bottom mt-4 mb-4 pb-2">Overview</h2>
+      <p>
+        On April 8, 2018 I submitted a survey to
+        <a href="https://www.reddit.com/r/ruby/comments/8ambn1/ruby_pdf_rendering_survey/">r/ruby</a> requesting feedback on what members of the ruby community are currently doing for PDF rendering.
+      </p>
+      <p>These are the result of that survey.</p>
+      <p>Overall, most of the <strong>101</strong> survey responses and numerous comments made on the post were positive and provided a lot of great insight and feedback. If you responded, thank you!</p>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div id="2a" class="row">
+    <div class="col-12">
+      <h2 class="text-center border-bottom mb-4 pb-2">Do you find building complex PDF's painful?</h2>
+      <p>
+        <strong>100 Total Responses</strong><br>
+        The general consensus seems to be that PDF aren't as easy to support as say, JSON or XML. 57% of respondents expressed some level of difficult when rendering PDF's with ruby.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive-item">
+          <canvas id="q-2a" class=""></canvas>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            type: 'pie',
+            data: {
+              datasets: [{
+                data: [
+                  43, 24, 33
+                ],
+                backgroundColor: window.chartColors
+              }],
+              labels: [
+                'Somewhat (33%)',
+                'Not really (24%)',
+                'Zomg I hate adding PDF support (43%)'
+              ]
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: '<%= params[:pdf] ? 'right' : 'bottom' %>'
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          };
+
+          window.addEventListener('load', function() {
+            var ctx = document.getElementById('q-2a').getContext('2d');
+            new Chart(ctx, config);
+          })
+        })();
+      </script>
+    </div>
+  </div>
+
+  <div id="2b" class="row">
+    <div class="col-12">
+      <h2 class="text-center border-bottom mb-4 pb-2">What do you use for PDF rendering?</h2>
+      <p>
+        <strong>97 Total Responses</strong><br>
+        Most respondents stated they used Prawn, while the combined wkhtml2pdf powered usage seems widely used. A handful respondents also suggested other solutions, such as microservices and SaaS offerings.
+      </p>
+      <p>A uprising number of ruby users are well apt at manipulating cosmic rays to flip bits on disk! If only we all could be so talented!</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive-item">
+          <canvas id="q-2b" class="pull-right"></canvas>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            type: 'polarArea',
+            data: {
+              datasets: [{
+                data: [
+                  55, 39, 18, 13, 6, 14
+                ],
+                backgroundColor: window.chartColors
+              }],
+              labels: [
+                'Prawn',
+                'wkhtml2pdf',
+                'WickedPDF',
+                'PDFKit',
+                'I manually flip the bits with cosmic rays',
+                'Other'
+              ]
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: '<%= params[:pdf] ? 'right' : 'bottom' %>'
+              },
+              scales: {
+                xAxes: [
+                  {
+                    display: false
+                  }
+                ]
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          };
+
+          window.addEventListener('load', function() {
+            var ctx = document.getElementById('q-2b').getContext('2d');
+            new Chart(ctx, config);
+          })
+        })();
+      </script>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div id="2c" class="row">
+    <div class="col-12">
+      <h2 class="text-center border-bottom mb-4 pb-2">Approximately, how many PDFs do your systems render, per month?</h2>
+      <p>
+        <strong>75 Total Responses</strong><br>
+        76% of respondents are rendering less than 10,000 PDF's per month, with only 20% of respondents rendering more than 10,000 PDFs per month.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive-item">
+          <canvas id="q-2c" class=""></canvas>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            type: 'pie',
+            data: {
+              datasets: [{
+                data: [
+                  20, 24, 13, 9, 6, 3
+                ],
+                backgroundColor: window.chartColors
+              }],
+              labels: [
+                '1-100 (26.7%)',
+                '101-1,000 (32%)',
+                '1,001-10,000 (17.3%)',
+                '10,001-100,000 (12%)',
+                'Like, a gazillionor more (8%)',
+                'Other (3.9%)'
+              ]
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: '<%= params[:pdf] ? 'right' : 'bottom' %>'
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          };
+
+          window.addEventListener('load', function() {
+            var ctx = document.getElementById('q-2c').getContext('2d');
+            new Chart(ctx, config);
+          })
+        })();
+      </script>
+    </div>
+  </div>
+
+  <div id="2d" class="row">
+    <div class="col-12">
+      <h2 class="text-center border-bottom mb-4 pb-2">Do you render your PDFs from a web server process, in a background queue, or in a non-web environment?</h2>
+      <p>
+        <strong>99 Total Responses</strong><br>
+        Nearly all respondents reported rendering PDFs both in web processes and in background processes.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive-item">
+          <canvas id="q-2d" class="pull-right"></canvas>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            type: 'polarArea',
+            data: {
+              datasets: [{
+                data: [
+                  55, 58, 16, 2
+                ],
+                backgroundColor: window.chartColors
+              }],
+              labels: [
+                'Web Process',
+                'Background Process',
+                'Non-web environment',
+                'Other'
+              ]
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: '<%= params[:pdf] ? 'right' : 'bottom' %>'
+              },
+              scales: {
+                xAxes: [
+                  {
+                    display: false
+                  }
+                ]
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          };
+
+          window.addEventListener('load', function() {
+            var ctx = document.getElementById('q-2d').getContext('2d');
+            new Chart(ctx, config);
+          })
+        })();
+      </script>
+    </div>
+  </div>
+</div>
+
+
+<div class="page">
+  <div id="2e" class="row">
+    <div class="col-12">
+      <h2 class="text-center border-bottom mb-4 pb-2">Would you use a SaaS to render PDF's in your projects?</h2>
+      <p>
+        <strong>99 Total Responses</strong><br>
+        Approximately 50% of respondents would consider using a SaaS for their PDF rendering. Only 5% of respondents were enthusiastic about the idea.
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive-item">
+          <canvas id="q-2e" class=""></canvas>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            type: 'pie',
+            data: {
+              datasets: [{
+                data: [
+                  5, 45, 49
+                ],
+                backgroundColor: window.chartColors
+              }],
+              labels: [
+                'YES! (5%)',
+                'Maybe (45.5%)',
+                'No way (49.5%)'
+              ]
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: '<%= params[:pdf] ? 'right' : 'bottom' %>'
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          };
+
+          window.addEventListener('load', function() {
+            var ctx = document.getElementById('q-2e').getContext('2d');
+            new Chart(ctx, config);
+          })
+        })();
+      </script>
+    </div>
+  </div>
+
+  <div id="2f" class="row">
+    <div class="col-12">
+      <h2 class="text-center border-bottom mb-4 pb-2">What is hard about rendering PDFs?</h2>
+      <p>
+        <strong>85 Total Responses</strong><br>
+        The majority of respondents seemed to have problems displaying high fidelity components in a PDF, such as fonts, graphs, and images.
+      </p>
+      <p class="text-muted">
+        <strong><i class="fas fa-exclimation-circle"></i> Respondent Shout out!</strong><br>
+        To the rockstar who commented they don't have problems with PDFs because they aren't a 'terrible engineer'! 👏
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive-item">
+          <canvas id="q-2f" class="pull-right"></canvas>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            type: 'horizontalBar',
+            data: {
+              datasets: [{
+                data: [
+                  28, 35, 27, 18, 23, 8, 14
+                ],
+                backgroundColor: window.chartColors
+              }],
+              labels: [
+                'Fonts',
+                'Graphs',
+                'Images',
+                'UX to render in a background process',
+                'Sorting out binaries and libraries',
+                'Cookie/Session protected data',
+                'Layout/CSS'
+              ]
+            },
+            options: {
+              responsive: true,
+              legend: {
+                display: false
+              },
+              scales: {
+                yAxes: [
+                  {
+
+                  }
+                ]
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          };
+
+          window.addEventListener('load', function() {
+            var ctx = document.getElementById('q-2f').getContext('2d');
+            new Chart(ctx, config);
+          })
+        })();
+      </script>
+    </div>
+  </div>
+</div>
+
+<div class="page">
+  <div id="2g" class="row">
+    <div class="col-12">
+      <h2 class="text-center border-bottom mb-4 pb-2">What's the most important thing to you when it comes to PDF rendering?</h2>
+      <p>
+        <strong>97 Total Responses</strong><br>
+        Nearly half of respondents care more about ease of implementation, more than those concerned most about cost and performance combined!
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10 offset-1">
+      <div class="embed-responsive embed-responsive-16by9">
+        <div class="embed-responsive-item">
+          <canvas id="q-2g" class=""></canvas>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            type: 'pie',
+            data: {
+              datasets: [{
+                data: [
+                  1, 47, 19, 21
+                ],
+                backgroundColor: window.chartColors
+              }],
+              labels: [
+                'Cost (10.3%)',
+                'Ease of implementation (48.5%)',
+                'Performance (19.6%)',
+                'My user\'s experience (11.3%)'
+              ]
+            },
+            options: {
+              responsive: true,
+              legend: {
+                position: '<%= params[:pdf] ? 'right' : 'bottom' %>'
+              },
+              layout: {
+                padding: 20
+              }
+            }
+          };
+
+          window.addEventListener('load', function() {
+            var ctx = document.getElementById('q-2g').getContext('2d');
+            new Chart(ctx, config);
+          })
+        })();
+      </script>
+    </div>
+  </div>
+</div>
