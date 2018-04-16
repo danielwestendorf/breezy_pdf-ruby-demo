@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     backports (3.11.2)
-    breezy_pdf (0.0.19)
+    breezy_pdf (1.0.0)
       concurrent-ruby (~> 1)
       nokogiri (~> 1)
     concurrent-ruby (1.0.5)
@@ -33,7 +33,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  breezy_pdf (~> 0.0.19)
+  breezy_pdf (~> 1.0.0)
   puma
   sinatra
   sinatra-contrib
