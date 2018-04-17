@@ -146,7 +146,7 @@
     <div class="col-12">
       <h2 class="text-center border-bottom mb-4 pb-2">What do you use for PDF rendering?</h2>
       <p>
-        <strong>97 Total Responders, 145 Total Responses</strong><br>
+        <strong>97 Total Respondents, 145 Total Responses</strong><br>
         Most respondents stated they used Prawn, while the combined wkhtml2pdf powered solutions usage seems most widely used. A handful respondents also suggested other solutions, such as micro-services and SaaS offerings.
       </p>
       <p>A surprising number of ruby users are well apt at manipulating cosmic rays to flip bits on disk! ☀️</p>
@@ -163,7 +163,7 @@
       <script type="text/javascript">
         (function() {
           var config = {
-            type: 'polarArea',
+            type: 'horizontalBar',
             data: {
               datasets: [{
                 data: [
@@ -183,7 +183,7 @@
             options: {
               responsive: true,
               legend: {
-                position: '<%= params[:pdf] ? 'right' : 'bottom' %>'
+                display: false
               },
               scales: {
                 xAxes: [
@@ -270,7 +270,7 @@
     <div class="col-12">
       <h2 class="text-center border-bottom mb-4 pb-2">Do you render your PDFs from a web server process, in a background queue, or in a non-web environment?</h2>
       <p>
-        <strong>99 Total Responders, 131 Total Responses</strong><br>
+        <strong>99 Total Respondents, 131 Total Responses</strong><br>
         Nearly all respondents reported rendering PDFs both in web and background processes.
       </p>
     </div>
@@ -286,7 +286,7 @@
       <script type="text/javascript">
         (function() {
           var config = {
-            type: 'polarArea',
+            type: 'horizontalBar',
             data: {
               datasets: [{
                 data: [
@@ -304,14 +304,7 @@
             options: {
               responsive: true,
               legend: {
-                position: '<%= params[:pdf] ? 'right' : 'bottom' %>'
-              },
-              scales: {
-                xAxes: [
-                  {
-                    display: false
-                  }
-                ]
+                display: false
               },
               layout: {
                 padding: 20
@@ -389,7 +382,7 @@
     <div class="col-12">
       <h2 class="text-center border-bottom mb-4 pb-2">What is hard about rendering PDFs?</h2>
       <p>
-        <strong>85 Total Responses</strong><br>
+        <strong>85 Total Respondents, 153 Total Responses</strong><br>
         The majority of respondents seemed to have problems displaying high fidelity elements in PDFs, such as fonts, graphs, and images.
       </p>
       <p class="text-muted">
@@ -431,13 +424,6 @@
               responsive: true,
               legend: {
                 display: false
-              },
-              scales: {
-                yAxes: [
-                  {
-
-                  }
-                ]
               },
               layout: {
                 padding: 20
