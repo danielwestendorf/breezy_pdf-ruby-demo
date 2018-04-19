@@ -10,7 +10,7 @@ BreezyPDF.setup do |config|
 
   # See the breezy_pdf gem's documentation for configuration information
   # https://github.com/danielwestendorf/breezy_pdf-ruby#configuration
-  config.middleware_path_matchers   = [/locations\.pdf/, /survey-results\.pdf/]
+  config.middleware_path_matchers   = [/locations\.pdf/, /survey-results\.pdf/, /dashboard\.pdf/]
   config.treat_urls_as_private      = true
   config.upload_assets              = true
   config.extract_metadata           = true
@@ -33,7 +33,11 @@ use Rack::Session::Cookie, key:          'session',
 helpers Sinatra::ContentFor
 
 get '/' do
-  redirect "/locations"
+  erb :dashboard, layout: :reports
+end
+
+get '/dashboard' do
+  erb :dashboard, layout: :reports
 end
 
 get '/locations' do
