@@ -169,11 +169,12 @@
     <script type="text/javascript">
       $(document).ready(function(){
         //initialize the javascript
+        window.pdf = <%= !params[:pdf].nil? %>;
         App.init();
         App.dashboard();
         setTimeout(function() {
           window.pdfRenderReady = true
-        }, 2500)
+        }, 250)
 
       });
     </script>

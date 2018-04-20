@@ -118,7 +118,7 @@ var App = (function () {
         var start     = 0;
         var end       = 0;
         var decimals  = 0;
-        var duration  = 1.5;
+        var duration  = (window.pdf ? 0.01 : 1.5);
 
         if( _el.data('prefix') ){ prefix = _el.data('prefix'); }
 
