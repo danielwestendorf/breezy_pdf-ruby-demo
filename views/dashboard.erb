@@ -71,10 +71,10 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row <%= "mt-1" if params[:pdf] %>">
     <div class="<%= params[:pdf] ? "col-6" : "col-12 col-sm-6" %>">
       <div class="user-stats">
-        <div class="user-stats-id mb-4">
+        <div class="user-stats-id mb-3">
           <div class="user-stats-avatar"><img src="/reports/img/avatars/img3.jpg" alt="avatar"></div>
           <div class="user-stats-info"><span class="user-stats-name">Justin Adams</span><span class="user-stats-position">Sales</span></div>
         </div>
@@ -93,7 +93,7 @@
     </div>
     <div class="<%= params[:pdf] ? "col-6" : "col-12 col-sm-6" %>">
       <div class="widget widget-fullwidth ads-chart">
-        <div class="widget-head mb-0"><span class="title">Advertisement</span></div>
+        <div class="widget-head mb-0 pb-0"><span class="title">Advertisement</span></div>
         <div class="ads-resume">
           <div class="ads-info pb-0">
             <div class="ads-progress"><span data-toggle="counter" data-end="55" data-suffix="%" class="ads-progress-counter">0</span><span class="ads-progress-title">Advance</span>
@@ -119,11 +119,11 @@
   <div class="row page-break-avoid">
     <div class="<%= params[:pdf] ? "col-6" : "col-12 col-sm-6" %>">
       <div class="widget widget-fullwidth earnings">
-        <div class="widget-head">
+        <div class="widget-head mb-0 pb-0">
           <div class="tools breezy-pdf-remove"><span class="icon fas fa-sync"></span></div><span class="title">Weekly Earnings</span>
         </div>
         <div class="earnings-resume">
-          <div class="earnings-value earnings-value-big"><span data-toggle="counter" data-end="127.95" data-decimals="2" data-prefix="$" class="earnings-counter">0</span><span class="earnings-title">Advance</span></div>
+          <div class="earnings-value earnings-value-big mb-4"><span data-toggle="counter" data-end="127.95" data-decimals="2" data-prefix="$" class="earnings-counter">0</span><span class="earnings-title">Advance</span></div>
           <div class="earnings-value"><span data-toggle="counter" data-end="527" data-decimals="2" data-prefix="$" class="earnings-counter">0</span><span class="earnings-title">Estimated</span></div>
           <div class="earnings-value"><span data-toggle="counter" data-end="79" data-suffix="%" class="earnings-counter">0</span><span class="earnings-title">More Sales</span></div>
         </div>
@@ -133,7 +133,7 @@
       </div>
     </div>
     <div class="<%= params[:pdf] ? "col-6" : "col-12 col-sm-6" %>">
-      <div class="usage usage-dark">
+      <div class="usage usage-dark p-4">
         <div class="usage-head"><span class="usage-head-title">Download Files</span>
           <div class="usage-head-tools breezy-pdf-remove"><span class="icon fas fa-sync"></span></div>
         </div>
@@ -142,7 +142,7 @@
           <div class="usage-icon"><span class="icon fas fa-chart-area"></span></div>
         </div>
       </div>
-      <div class="usage usage-primary">
+      <div class="usage usage-primary p-4">
         <div class="usage-head"><span class="usage-head-title">Server CPU</span>
           <div class="usage-head-tools breezy-pdf-remove"><span class="icon fas fa-sync"></span></div>
         </div>
