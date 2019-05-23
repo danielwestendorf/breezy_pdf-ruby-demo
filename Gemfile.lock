@@ -7,18 +7,18 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     backports (3.11.3)
-    breezy_pdf (1.0.0)
+    breezy_pdf (1.0.2)
       concurrent-ruby (~> 1)
       nokogiri (~> 1)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.5)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
     mustermann (1.0.2)
-    nokogiri (1.8.2)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.10.3)
+      mini_portile2 (~> 2.4.0)
     puma (3.11.3)
     rack (2.0.5)
     rack-protection (2.0.3)
@@ -45,7 +45,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  breezy_pdf (~> 1.0.0)
+  breezy_pdf (~> 1.0.2)
   puma
   sinatra
   sinatra-contrib
