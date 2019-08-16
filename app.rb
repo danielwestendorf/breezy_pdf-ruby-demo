@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/content_for'
+require 'rack/ssl'
 
 require 'breezy_pdf'
 
@@ -31,6 +32,8 @@ use Rack::Session::Cookie, key:          'session',
                            secret:       ENV.fetch("SECRET", "123456")
 
 helpers Sinatra::ContentFor
+
+use Rack::SSL if ENV['RACK_ENV'] == 'production'
 
 get '/' do
   erb :dashboard, layout: :reports

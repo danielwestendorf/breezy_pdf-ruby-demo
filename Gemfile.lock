@@ -15,6 +15,8 @@ GEM
     rack (2.0.7)
     rack-protection (2.0.5)
       rack
+    rack-ssl (1.4.1)
+      rack
     sinatra (2.0.5)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -35,6 +37,7 @@ PLATFORMS
 DEPENDENCIES
   breezy_pdf (~> 1.0.2)
   puma
+  rack-ssl
   sinatra
   sinatra-contrib
 
@@ -42,4 +45,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.1
+   1.17.3
